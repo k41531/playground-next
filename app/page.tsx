@@ -4,9 +4,12 @@ import InputField from "./_components/input-field";
 export default function Home() {
   return (
     <main >
-      <label htmlFor="username">ユーザー名</label>
-      <input id="username" type="text" />
-      <InputField value="" onChange={() => {}} />
+      <InputField label="ユーザー名" value={""} onChange={(value: string): void => {
+        throw new Error("Function not implemented.");
+      } } />
+      <InputField label="パスワード" type="password" value={""} onChange={(value: string): void => {
+        throw new Error("Function not implemented.");
+      } } />
     </main>
   );
 }

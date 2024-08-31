@@ -42,4 +42,25 @@ describe('ログイン画面に関するテスト', () => {
     fireEvent.change(passwordInput, { target: { value: '' } });
     expect(loginButton).toBeDisabled()
   })
+  test('有効なユーザー名とパスワードを入力してログインボタンをクリックすると、ログイン処理が開始される', () => {
+    const usernameInput = screen.getByLabelText('ユーザー名')
+    const passwordInput = screen.getByLabelText('パスワード')
+    const loginButton = screen.getByText('ログイン')
+
+    fireEvent.change(usernameInput, { target: { value: 'username' } });
+    fireEvent.change(passwordInput, { target: { value: 'password' } });
+    fireEvent.click(loginButton)
+  })
+  
+  test('ログイン処理中はログインボタンが無効になり、ローディング表示される', () => {
+    const usernameInput = screen.getByLabelText('ユーザー名')
+    const passwordInput = screen.getByLabelText('パスワード')
+    const loginButton = screen.getByText('ログイン')
+
+    fireEvent.change(usernameInput, { target: { value: 'username' } });
+    fireEvent.change(passwordInput, { target: { value: 'password' } });
+    fireEvent.click(loginButton)
+    expect(loginButton).toBeDisabled()
+    expect(screen.getByText('ローディング...')).toBeDefined()
+  })
 })

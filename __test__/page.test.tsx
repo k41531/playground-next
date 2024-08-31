@@ -1,9 +1,16 @@
-import { beforeAll, describe, expect, test } from 'vitest'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { afterEach, beforeAll, beforeEach, describe, expect, it, test, vi } from 'vitest'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import Page from '../app/page'
-import { before } from 'node:test'
 
-
+// useRouterのモック
+const pushMock = vi.fn()
+vi.mock('next/navigation', () => ({
+  useRouter() {
+    return {
+      push: pushMock,
+    }
+  },
+}))
 
 describe('ログイン画面に関するテスト', () => {
   beforeAll(() => {

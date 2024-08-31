@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Box from '../_components/3d/box'
 
 export default function HomePage() {
   const router = useRouter()
@@ -26,6 +27,7 @@ export default function HomePage() {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">ホーム</h1>
       <p className="mb-4">ようこそ！ログインに成功しました。</p>
+      <Box />
       <button
         type="button"
         onClick={handleLogout}

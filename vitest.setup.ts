@@ -1,4 +1,15 @@
 import '@testing-library/jest-dom/vitest'
-import { vi } from 'vitest';
+import { server } from './mocks/node'
+import { afterAll, afterEach, beforeAll } from 'vitest'
 
-global.fetch = vi.fn() as unknown as typeof fetch;
+beforeAll(() => {
+  server.listen()
+})
+
+afterEach(() => {
+  server.resetHandlers()
+})
+
+afterAll(() => {
+  server.close()
+})

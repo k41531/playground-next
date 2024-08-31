@@ -1,13 +1,20 @@
-import { login } from "../app/_repositories/user"
+import { getUser, login } from "../app/_repositories/user"
 import { describe, expect, it } from "vitest"
 
 describe('ユーザーログイン', () => {
-  it('ログイン成功', async () => {
-    const result = await login('testuser', 'password123')
-    expect(result).toEqual({ token: 'fake-jwt-token' })
+  it('ユーザー情報を取得できる', async () => {
+    const response = await getUser();
+  
+    expect(response.status).toBe(200)
+    expect(response.statusText).toBe('OK')
+    expect(await response.json()).toEqual({
+      firstName: 'John',
+      lastName: 'Maverick',
+    })
   })
-
-  // it('should throw an error with incorrect credentials', async () => {
-  //   await expect(login('wronguser', 'wrongpassword')).rejects.toThrow('Login failed')
-  // })
+  it('ユーザーログインができる', async () => {
+    const result = await login('testuser', 'password123')
+    expect(result.status).toBe(200)
+    expect(result.statusText).toBe('OK')
+  })
 })

@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, test } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import Page from '../app/page'
 import { before } from 'node:test'
 
@@ -23,5 +23,23 @@ describe('ログイン画面に関するテスト', () => {
     const loginButton = screen.getByText('ログイン')
     expect(loginButton).toBeDefined()
     expect(loginButton).toHaveAttribute('type', 'button')
+  })
+  test('ユーザー名が空の場合、ログインボタンが無効になっている', () => {
+    const usernameInput = screen.getByLabelText('ユーザー名')
+    const passwordInput = screen.getByLabelText('パスワード')
+    const loginButton = screen.getByText('ログイン')
+
+    fireEvent.change(usernameInput, { target: { value: '' } });
+    fireEvent.change(passwordInput, { target: { value: 'password' } });
+    expect(loginButton).toBeDisabled()
+  })
+  test('パスワードが空の場合、ログインボタンが無効になっている', () => {
+    const usernameInput = screen.getByLabelText('ユーザー名')
+    const passwordInput = screen.getByLabelText('パスワード')
+    const loginButton = screen.getByText('ログイン')
+
+    fireEvent.change(usernameInput, { target: { value: 'username' } });
+    fireEvent.change(passwordInput, { target: { value: '' } });
+    expect(loginButton).toBeDisabled()
   })
 })

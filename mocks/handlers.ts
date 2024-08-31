@@ -7,9 +7,16 @@ export const handlers = [
       lastName: 'Maverick',
     })
   }),
-  http.post('https://api.example.com/api/login', () => {
+  http.post('https://api.example.com/api/login', async ({ request }) => {
+    const { email, password } = await request.json() as { email: string; password: string }
+ 
+    if (email === 'validuser' && password === 'password123') {
+      return HttpResponse.json({
+        token: 'fake-jwt-token',
+      })
+    }
     return HttpResponse.json({
-      token: 'fake-jwt-token',
-    })
+      error: 'Invalid email or password',
+    }, { status: 401 })
   }),
 ]

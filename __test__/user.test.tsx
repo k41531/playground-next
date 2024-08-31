@@ -13,8 +13,13 @@ describe('ユーザーログイン', () => {
     })
   })
   it('ユーザーログインができる', async () => {
-    const result = await login('testuser', 'password123')
+    const result = await login('validuser', 'password123')
     expect(result.status).toBe(200)
     expect(result.statusText).toBe('OK')
+  })
+  it('ユーザーログインができない', async () => {
+    const result = await login('invaliduser', 'password123')
+    expect(result.status).toBe(401)
+    expect(result.statusText).toBe('Unauthorized')
   })
 })

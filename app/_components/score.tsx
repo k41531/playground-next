@@ -5,8 +5,8 @@ interface ScoreProps {
 const Score: React.FC<ScoreProps> = ({ score }) => {
   return (
     <div data-testid="score" className="score">
-      <h2 className="text-xl font-semibold mb-2">スコア</h2>
-      <p>{score}</p>
+      <h2 className="text-xl font-semibold">スコア</h2>
+      <p className="text-8xl text-gray-600">{score}</p>
     </div>
   )
 }

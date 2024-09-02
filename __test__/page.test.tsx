@@ -70,4 +70,9 @@ describe('ログイン画面に関するテスト', () => {
     expect(loginButton).toBeDisabled()
     expect(screen.getByText('ローディング...')).toBeDefined()
   })
+  test('ログイン画面にはBottomNavigationが表示されない', () => {
+    render(<Page />);
+    const bottomNav = screen.queryByRole("navigation")
+    expect(bottomNav).toBeNull();
+  })
 })

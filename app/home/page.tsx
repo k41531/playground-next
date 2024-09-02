@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Box from '../_components/3d/box'
-import SpineAnimation from '../_components/spine/spine-animation'
 import Score from '../_components/score'
 import Button from '../_components/button'
 import { getUser } from '../_repositories/user'
@@ -56,17 +54,7 @@ export default function HomePage() {
   
       <Button label="マイナス" onClick={() => setScore(score - 1)} />
       <Button label="プラス" onClick={() => setScore(score + 1)} />
-      <Box />
-      <SpineAnimation
-        baseUrl="assets/spineboy/"
-        skeletonFile="spineboy-pro.json"
-        initialAnimation="walk"
-        scale={1.0}
-        position={[0, -300, 0]}
-        cameraPosition={[0, 200, 600]}
-        onLoad={() => console.log('Spine animation loaded')}
-        onError={(error) => console.error('Failed to load Spine animation:', error)}
-      />
+        <div>
       <button
         type="button"
         onClick={handleLogout}
@@ -74,6 +62,7 @@ export default function HomePage() {
       >
         ログアウト
       </button>
+        </div>
     </div>
   )
 }

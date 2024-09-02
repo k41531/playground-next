@@ -24,6 +24,11 @@ describe("ホーム画面に関するテスト", () => {
       cleanup();
     });
 
+    it('ホーム画面にユーザーの名前が表示される', () => {
+      const usernameElement = screen.getByTestId('username')
+      expect(usernameElement).toBeInTheDocument()
+    })
+
     it('ホーム画面ではBottomNavigationが表示される', () => {
    
       // Check if BottomNavigation is present

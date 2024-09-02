@@ -6,9 +6,11 @@ import Box from '../_components/3d/box'
 import SpineAnimation from '../_components/spine/spine-animation'
 import Score from '../_components/score'
 import Button from '../_components/button'
+import { getUser } from '../_repositories/user'
 
 export default function HomePage() {
   const router = useRouter()
+  const [username, setUsername] = useState<string>("");
   const [score, setScore] = useState(100) // Add state for score
 
   useEffect(() => {
@@ -18,6 +20,19 @@ export default function HomePage() {
       // If not logged in, redirect to the login page
       router.push('/')
     }
+    // Fetch the user data
+    getUser()
+      .then((response) => response.json())
+      .then((data) => {
+        setUsername(data.nickname)
+        setScore(data.score)
+      })
+      .catch((error) => {
+        console.error('Failed to fetch user data:', error)
+        // If there is an error, redirect to the login page
+        router.push('/')
+      }
+    )
   }, [router])
 
   const handleLogout = () => {
@@ -30,7 +45,13 @@ export default function HomePage() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">ホーム</h1>
-      <p className="mb-4">ようこそ！ログインに成功しました。</p>
+      <p>
+      <span className="mb-4">ようこそ！</span>
+      <span data-testid="username">{username}</span> <span>さん</span>
+      </p>
+      <p>
+      <span className="mb-4">ログインに成功しました。</span>
+      </p>
       <Score score={score} /> {/* Use state score */}
   
       <Button label="マイナス" onClick={() => setScore(score - 1)} />

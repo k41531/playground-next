@@ -7,14 +7,16 @@ import { vi } from 'vitest'
 vi.mock('@react-three/fiber')
 vi.mock('three')
 
-beforeAll(() => {
-  server.listen()
-})
 
-afterEach(() => {
-  server.resetHandlers()
-})
+// モックAPIを叩くときはコメントアウトを外す
+// beforeAll(() => {
+//   server.listen()
+// })
 
-afterAll(() => {
-  server.close()
-})
+// afterEach(() => {
+//   server.resetHandlers()
+// })
+
+// afterAll(() => {
+//   server.close()
+// })

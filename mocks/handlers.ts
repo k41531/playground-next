@@ -1,10 +1,10 @@
 import { http, graphql, HttpResponse } from 'msw'
 
 export const handlers = [
-  http.get('https://api.example.com/user', () => {
+  http.get('https://api.example.com/api/user', () => {
     return HttpResponse.json({
-      firstName: 'John',
-      lastName: 'Maverick',
+      nickname: 'John Doe',
+      score: 100,
     })
   }),
   http.post('https://api.example.com/api/login', async ({ request }) => {

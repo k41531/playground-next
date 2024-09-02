@@ -18,7 +18,7 @@ const fetchWithHeaders = async (url: string, options: RequestInit = {}) => {
 };
 
 export const getUser = async () => {
-    return fetchWithHeaders('/user', {
+    return fetchWithHeaders('/api/user', {
         method: 'GET'
     });
 };

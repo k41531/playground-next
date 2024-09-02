@@ -14,14 +14,14 @@ vi.mock('next/navigation', () => ({
 }))
 
 describe("ホーム画面に関するテスト", () => {
-
-    test('ホーム画面ではBottomNavigationが表示される', () => {
-  
-      // Render the HomePage component
+    beforeAll(() => {
       render(<Layout>
         <HomePage/>
-      </Layout>);
-  
+      </Layout>)
+    })
+
+    test('ホーム画面ではBottomNavigationが表示される', () => {
+   
       // Check if BottomNavigation is present
       const bottomNav = screen.getByRole('navigation')
       expect(bottomNav).toBeInTheDocument()

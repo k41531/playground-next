@@ -9,7 +9,7 @@ export default function Home() {
 	const [username, setUsername] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [errorMessage, setErrorMessage] = useState< string | null >(null);
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const router = useRouter();
 	return (
 		<main className="flex flex-col items-center justify-center min-h-screen">
@@ -43,7 +43,7 @@ export default function Home() {
 								if (data.error) {
 									setErrorMessage(data.error);
 								} else {
-								  localStorage.setItem("token", data.token);
+									localStorage.setItem("token", data.token);
 									router.push("/home");
 								}
 							})
@@ -55,7 +55,7 @@ export default function Home() {
 					disabled={username === "" || password === "" || isLoading}
 				/>
 				{isLoading && <p>ローディング...</p>}
-				{errorMessage && < p className="text-red-500">{errorMessage}</p >}
+				{errorMessage && <p className="text-red-500">{errorMessage}</p>}
 			</div>
 		</main>
 	);

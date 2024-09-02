@@ -9,6 +9,7 @@ export default function Home() {
 	const [username, setUsername] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [errorMessage, setErrorMessage] = useState< string | null >(null);
 	const router = useRouter();
 	return (
 		<main className="flex flex-col items-center justify-center min-h-screen">
@@ -34,19 +35,27 @@ export default function Home() {
 					label="ログイン"
 					onClick={async () => {
 						setIsLoading(true);
-						await new Promise((resolve) => setTimeout(resolve, 2000));
+						setErrorMessage(null);
+						await new Promise((resolve) => setTimeout(resolve, 0));
 						login(username, password)
 							.then((response) => response.json())
 							.then((data) => {
-								console.log("ログイン成功");
-								localStorage.setItem("token", data.token);
-								router.push("/home");
+								if (data.error) {
+									setErrorMessage(data.error);
+								} else {
+								  localStorage.setItem("token", data.token);
+									router.push("/home");
+								}
+							})
+							.catch((error) => {
+								setErrorMessage("サーバーエラーが発生しました。");
 							});
 						setIsLoading(false);
 					}}
 					disabled={username === "" || password === "" || isLoading}
 				/>
 				{isLoading && <p>ローディング...</p>}
+				{errorMessage && < p className="text-red-500">{errorMessage}</p >}
 			</div>
 		</main>
 	);
